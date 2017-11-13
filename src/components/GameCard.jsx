@@ -19,9 +19,10 @@ const setStyle = (padWeight, topMargin) => {
 
 const GameCard = (props) => {
 const CardStyle = setStyle(props.padWeight, props.topMargin)
+console.log(props.cardFace)
     return (
         <CardStyle>
-            <img src={DeckImages[props.cardSuit][props.cardFace]}/>
+            <img src={DeckImages[props.cardFace][props.cardSuit]}/>
         </CardStyle>
     )
 }

@@ -57,66 +57,84 @@ import AceClubs from "../images/AC.svg"
 import Table from '../images/table.svg'
 
 
-const DeckImages = {
-    Hearts: {
-        Two: TwoHearts,
-        Three: ThreeHearts,
-        Four: FourHearts,
-        Five: FiveHearts,
-        Six: SixHearts,
-        Seven: SevenHearts,
-        Eight: EightHearts,
-        Nine: NineHearts,
-        Ten: TenHearts,
-        Jack: JackHearts,
-        Queen: QueenHearts,
-        King: KingHearts,
-        Ace: AceHearts
+const DeckImages = { 
+    '2': {
+        H: TwoHearts,
+        D: TwoDiamonds,
+        S: TwoSpades,
+        C: TwoClubs
     },
-    Diamonds: {
-        Two: TwoDiamonds,
-        Three: ThreeDiamonds,
-        Four: FourDiamonds,
-        Five: FiveDiamonds,
-        Six: SixDiamonds,
-        Seven: SevenDiamonds,
-        Eight: EightDiamonds,
-        Nine: NineDiamonds,
-        Ten: TenDiamonds,
-        Jack: JackDiamonds,
-        Queen: QueenDiamonds,
-        King: KingDiamonds,
-        Ace: AceDiamonds
+    '3': {
+        H: ThreeHearts,
+        D: ThreeDiamonds,
+        S: ThreeSpades,
+        C: ThreeClubs
     },
-    Spades: {
-        Two: TwoSpades,
-        Three: ThreeSpades,
-        Four: FourSpades,
-        Five: FiveSpades,
-        Six: SixSpades,
-        Seven: SevenSpades,
-        Eight: EightSpades,
-        Nine: NineSpades,
-        Ten: TenSpades,
-        Jack: JackSpades,
-        Queen: QueenSpades,
-        King: KingSpades,
-        Ace: AceSpades
+    '4': {
+        H: FourHearts,
+        D: FourDiamonds,
+        S: FourSpades,
+        C: FourClubs
     },
-    Diamonds: {
-        Two: TwoDiamonds,
-        Three: ThreeDiamonds,
-        Four: FourDiamonds,
-        Five: FiveDiamonds,
-        Six: SixDiamonds,
-        Seven: SevenDiamonds,
-        Eight: EightDiamonds,
-        Nine: NineDiamonds,
-        Ten: TenDiamonds,
-        Jack: JackDiamonds,
-        Queen: QueenDiamonds,
-        King: KingDiamonds,
-        Ace: AceDiamonds
+    '5': {
+        H: FiveHearts,
+        D: FiveDiamonds,
+        S: FiveSpades,
+        C: FiveClubs
+    },
+    '6': {
+        H: SixHearts,
+        D: SixDiamonds,
+        S: SixSpades,
+        C: SixClubs
+    },
+    '7': {
+        H: SevenHearts,
+        D: SevenDiamonds,
+        S: SevenSpades,
+        C: SevenClubs
+    },
+    '8': {
+        H: EightHearts,
+        D: EightDiamonds,
+        S: EightSpades,
+        C: EightClubs
+    },
+    '9': {
+        H: NineHearts,
+        D: NineDiamonds,
+        S: NineSpades,
+        C: NineClubs
+    },
+    '1': {
+        H: TenHearts,
+        D: TenDiamonds,
+        S: TenSpades,
+        C: TenClubs
+    },
+    'J': {
+        H: JackHearts,
+        D: JackDiamonds,
+        S: JackSpades,
+        C: JackClubs
+    },
+    'Q': {
+        H: QueenHearts,
+        D: QueenDiamonds,
+        S: QueenSpades,
+        C: QueenClubs
+    },
+    'K': {
+        H: KingHearts,
+        D: KingDiamonds,
+        S: KingSpades,
+        C: KingClubs
+    },
+    'A': {
+        H: AceHearts,
+        D: AceDiamonds,
+        S: AceSpades,
+        C: AceClubs
     },
     Table: Table
 }

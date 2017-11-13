@@ -20,7 +20,7 @@ class OpponentHand extends Component {
             <div>
             {cards.map(function (card, index) {
                 return ([ 
-                    <div key={`${card.face}-${card.suit}`}><GameCard cardFace={card.face} cardSuit={card.suit} topMargin={5} padWeight={index}/> </div> 
+                    <div key={`${card.charAt(0)}-${card.charAt(1)}`}><GameCard cardFace={card.charAt(0)} cardSuit={card.charAt(1)} topMargin={5} padWeight={index}/> </div> 
                 ]);
               })}
             </div>    

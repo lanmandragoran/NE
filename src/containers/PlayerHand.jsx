@@ -5,19 +5,19 @@ import GameCard from '../components/GameCard'
 class PlayerHand extends Component {
     constructor(props){
         super(props)
-        this.state = {
-            isTurn: this.props.turn,
-            cardsInHand: this.props.cards,
-            numCards: this.props.cards.length,
-            jackScore: 0,
-            busted: false,
+            this.isTurn = this.props.isTurn,
+            this.cardsInHand = this.props.cards,
+            this.numCards = this.props.cards.length,
+            this.jackScore = 0,
+            this.busted = false,
+            this.wantHit = this.props.wantHit
+            this.turnDone = this.props.turnDone
         }
-    }
 
     render(){
-        const playerWillHit = this.props.wantHit
-        const playerWillStay = this.props.turnDone
-        const cards = this.state.cardsInHand
+        const playerWillHit = this.wantHit
+        const playerWillStay = this.turnDone
+        const cards = this.cardsInHand
         return (
             <div>
             {cards.map(function (card, index) {

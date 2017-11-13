@@ -32,7 +32,7 @@ class Game extends Component{
     }
 
     componentWillMount(){
-        let fullDeck = ['AH', '8D', 'KH', 'KS', 'AD', 'AC', '1H', '1D', '2S', '3D']
+        let fullDeck = ['2H', '4D', '6H', '3S', '2D', '5C', '7H', '6D', '2S', '3D']
         let playerFirstHand = [] 
         let opponentFirstHand = []
         let newDeck = []
@@ -48,20 +48,25 @@ class Game extends Component{
         let tempOpponentVal = CardValCalc(opponentFirstHand, this.state.opponentHand.cardVals, true)
         let tempPlayerVal = CardValCalc(playerFirstHand, this.state.playerHand.cardVals, true)
 
-        this.setState({
+        this.setState(prevState => ({
+            gameOver: prevState.gameOver,
+            gameStart: prevState.gameStart,
             deck: {
-                cards: newDeck
+                ...prevState.deck,
+                cards: newDeck   
             },
             opponentHand: {
+                ...prevState.opponentHand,
                 cards: opponentFirstHand,
                 cardVals: tempOpponentVal
             },
             playerHand: {
+                ...prevState.playerHand,
                 cards: playerFirstHand,
                 cardVals: tempPlayerVal,
                 isTurn: true
             }
-        })
+        }))
 
     }
 
@@ -74,19 +79,26 @@ class Game extends Component{
             let tempPlayerVal = CardValCalc(tempCard, this.state.playerHand.cardVals, false)
             tempOldHand.push(tempCard)
             
-            this.setState({
+        this.setState(prevState => ({
+                gameOver: prevState.gameOver,
+                gameStart: prevState.gameStart,
                 deck: {
+                    ...prevState.deck,
                     cards: tempDeck
                 },
                 playerHand: {
+                    ...prevState.playerHand,
                     cards: tempOldHand,
                     cardVals: tempPlayerVal
+                },
+                opponentHand: {
+                    ...prevState.opponentHand
                 }
-            })
+            }))
         }
     }
 
-    shouldHitOpponent(){
+    shouldHitOpponent(willHit){
         if(willHit){
             let tempOldHand = this.state.opponentHand.cards
             let tempOpponentDeal = Deal(this.state.deck.cards, false)
@@ -95,34 +107,57 @@ class Game extends Component{
             let tempOpponentVal = CardValCalc(tempCard, this.state.opponentHand.cardVals, false)
             tempOldHand.push(tempCard)
             
-            this.setState({
+            this.setState(prevState => ({
+                gameOver: prevState.gameOver,
+                gameStart: prevState.gameStart,
                 deck: {
+                    ...prevState.deck,
                     cards: tempDeck
                 },
                 opponentHand: {
+                    ...prevState.opponentHand,
                     cards: tempOldHand,
                     cardVals: tempOpponentVal
+                },
+                playerHand: {
+                    ...prevState.playerHand
                 }
-            })
+            }))
         }
     }
 
     playersTurnDone(){
-        this.state.playerHand.isTurn = false
-        this.state.opponentHand.isTurn = true
-        console.log(this.state)
+        this.setState(prevState => ({
+            gameStart: false,
+            gameOver: prevState.gameOver,
+            playerHand: {
+                ...prevState.playerHand,
+                isTurn: false
+            },
+            opponentHand: {
+                ...prevState.opponentHand,
+                isTurn: true
+            }
+        }))
     }
 
     opponentsTurnDone(){
-        this.state.opponentHand.isTurn = false
-        this.state.playerHand.isTurn = true
+        this.setState(prevState => ({
+            gameStart: false,
+            gameOver: prevState.gameOver,
+            playerHand: {
+                ...prevState.playerHand,
+                isTurn: true
+            },
+            opponentHand: {
+                ...prevState.opponentHand,
+                isTurn: false
+            }
+        }))
     }
 
 
     render() {
-
-        console.log(this.state)
-
         const firstHand = this.state.gameStart
         const playersTurn = this.state.playerHand.isTurn
         const playersCards = this.state.playerHand.cards 
@@ -131,14 +166,15 @@ class Game extends Component{
         const playersTurnDone = this.playersTurnDone.bind(this)
         const shouldHitOpponent = this.shouldHitOpponent.bind(this)
         const opponentsTurnDone = this.opponentsTurnDone.bind(this)
+        const opponentCardVals = this.state.opponentHand.cardVals
+        const opponentsTurn = this.state.opponentHand.isTurn
 
         return(
             <div>
                 <Table/>
                     <div>
-                    {firstHand ? <div> <PlayerHand cards={playersCards} wantHit={shouldHitPlayer.bind(this)} turnDone={playersTurnDone.bind(this)}/> <OpponentHand cards={opponentsCards} wantHit={shouldHitOpponent.bind(this)} turnDone={opponentsTurnDone.bind(this)}/> </div> : <div></div>}
-                    {playersTurn && !firstHand ? <PlayerHand cards={playerCards} wantHit={shouldHitPlayer.bind(this)} turnDone={playersTurnDone.bind(this)} isTurn={playersTurn}/> : <div></div> }
-                    {!playersTurn && !firstHand ? <OpponentHand cards={opponentsCards} wantHit={shouldHitOpponent.bind(this)} turnDone={opponentsTurnDone.bind(this)}/> : <div></div> }
+                        <PlayerHand cards={playersCards} wantHit={shouldHitPlayer} turnDone={playersTurnDone} isTurn={playersTurn}/> 
+                        <OpponentHand cards={opponentsCards} wantHit={shouldHitOpponent} cardVals={opponentCardVals} turnDone={opponentsTurnDone} isTurn={opponentsTurn}/> 
                     </div>
             </div>
         )
